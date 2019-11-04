@@ -11,10 +11,11 @@ module.exports = {
   },
 
   async store(req, res) {
-    const { filename } = "";
-
-    if (req.file != undefined) {
-      const { filename } = req.file;
+    if (req.file === undefined) {
+      filename = "";
+    } else {
+      filename = req.file.filename;
+      filename1 = filename.replace(/\s/g, "");
     }
 
     const { company, techs, price } = req.body;
@@ -28,7 +29,7 @@ module.exports = {
 
     const spot = await Spot.create({
       user: user_id,
-      thumbnail: filename,
+      thumbnail: filename1,
       company,
       techs: techs.split(",").map(tech => tech.trim()),
       price

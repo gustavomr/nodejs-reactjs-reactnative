@@ -34,9 +34,11 @@ export default function Login({ navigation }) {
     //const response = await api.post("/login", { email });
 
     const { _id } = response.data;
+    const { token } = response.data;
 
     //console.log(_id);
     await AsyncStorage.setItem("user", _id);
+    await AsyncStorage.setItem("token", token);
     await AsyncStorage.setItem("techs", techs);
 
     navigation.navigate("List");

@@ -11,6 +11,11 @@ export const login = (token, _id) => {
 };
 
 const Login = props => {
+  //better to do with routes
+  if (localStorage.getItem(process.env.REACT_APP_TOKEN_KEY) !== null) {
+    props.history.push("/dashboard");
+  }
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [messageError, setMessageError] = useState("");

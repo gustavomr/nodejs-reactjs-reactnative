@@ -23,11 +23,10 @@ api.interceptors.response.use(
     return config;
   },
   function(error) {
-    // different from 200
-    //console.log(error.response);
     if (
       error.response.status === 401 &&
-      error.response.data.message === "Token expired."
+      (error.response.data.message === "Token expired." ||
+        error.response.data.message === "Failed to authenticate token.")
     ) {
       console.log(error.response);
       logout();

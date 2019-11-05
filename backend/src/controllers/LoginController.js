@@ -15,12 +15,16 @@ module.exports = {
     if (user.password != base64Pass) {
       return res.status(401).send({ message: "Password does not match." });
     }
-    var token = jwt.sign({ user: user }, process.env.SECRET_API, {
-      expiresIn: 10000 // expires in 5min
-    });
-    user.token = token;
+
     var userObj = user.toObject();
     delete userObj.password;
+
+    var token = jwt.sign({ user: userObj }, process.env.SECRET_API, {
+      expiresIn: 10000 // expires in 5min
+    });
+
+    userObj.token = token;
+
     return res.json(userObj);
   },
 

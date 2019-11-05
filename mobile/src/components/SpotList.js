@@ -52,7 +52,7 @@ function SpotList({ tech, navigation }) {
             />
             <Text style={styles.company}>{item.company}</Text>
             <Text style={styles.price}>
-              {item.price ? `R$${item.price}/dia` : "GRATUITO"}
+              {item.price ? `R$ ${item.price}/dia` : "GRATUITO"}
             </Text>
             <TouchableOpacity
               onPress={() => handleNavigate(item._id)}

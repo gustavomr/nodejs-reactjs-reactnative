@@ -16,7 +16,7 @@ module.exports = {
       return res.status(401).send({ message: "Password does not match." });
     }
     var token = jwt.sign({ user: user }, process.env.SECRET_API, {
-      expiresIn: 1000 // expires in 5min
+      expiresIn: 10000 // expires in 5min
     });
     user.token = token;
     var userObj = user.toObject();

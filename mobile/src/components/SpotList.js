@@ -92,8 +92,8 @@ const styles = StyleSheet.create({
   },
 
   thumbnail: {
-    width: 200,
-    height: 120,
+    width: 100,
+    height: 50,
     resizeMode: "cover",
     borderRadius: 2
   },

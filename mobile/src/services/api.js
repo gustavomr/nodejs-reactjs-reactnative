@@ -1,10 +1,6 @@
 import axios from "axios";
 import { AsyncStorage } from "react-native";
-import { NavigationActions } from "react-navigation";
-
-const api = axios.create({
-  baseURL: "http://10.32.49.149:3333"
-});
+import NavigationService from "../services/NavigationService";
 
 export const getToken = () => AsyncStorage.getItem("token");
 
@@ -13,17 +9,20 @@ export const logout = () => {
   AsyncStorage.removeItem("user");
 };
 
-api.interceptors.request.use(async config => {
+export const axiosReference = axios.create({
+  baseURL: "http://10.32.49.149:3333"
+});
+
+axiosReference.interceptors.request.use(async config => {
   const token = await getToken();
-  console.log(token);
+  //console.log(token);
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
-
   return config;
 });
 
-api.interceptors.response.use(
+axiosReference.interceptors.response.use(
   async config => {
     //200
     return config;
@@ -35,11 +34,13 @@ api.interceptors.response.use(
       error.response.status === 401 &&
       error.response.data.message === "Token expired."
     ) {
-      console.log(error.response);
+      console.log("redirect");
+      //console.log(error.response);
       logout();
-      //do a redirect????
+      NavigationService.navigate("Login");
     }
     return Promise.reject(error);
   }
 );
-export default api;
+
+//export default api;

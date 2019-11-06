@@ -9,19 +9,17 @@ import {
   TouchableOpacity
 } from "react-native";
 
-import api from "../services/api";
+import { axiosReference } from "../services/api";
 
 function SpotList({ tech, navigation }) {
   const [spots, setSpots] = useState([]);
 
   useEffect(() => {
     async function loadSpots() {
-      console.log({ tech });
-      const response = await api.get("/spots", {
+      const response = await axiosReference.get("/spots", {
         params: { tech }
       });
 
-      console.log(response.data);
       setSpots(response.data);
     }
 

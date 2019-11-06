@@ -11,13 +11,13 @@ import {
   StyleSheet
 } from "react-native";
 
-import api from "../services/api";
+import { axiosReference } from "../services/api";
 import logo from "../assets/logo.png";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("gustavomr@gmail.com");
   const [password, setPassword] = useState("123456");
-  const [techs, setTechs] = useState("");
+  const [techs, setTechs] = useState("angular");
 
   useEffect(() => {
     AsyncStorage.getItem("user").then(user => {
@@ -29,7 +29,7 @@ export default function Login({ navigation }) {
 
   async function handleSubmit() {
     //console.log("response");
-    const response = await api.post("/login", { email, password });
+    const response = await axiosReference.post("/login", { email, password });
     //const response = await api.post("/login", { email });
 
     const { _id } = response.data;

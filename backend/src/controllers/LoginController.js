@@ -20,7 +20,7 @@ module.exports = {
     delete userObj.password;
 
     var token = jwt.sign({ user: userObj }, process.env.SECRET_API, {
-      expiresIn: 10000 // expires in 5min
+      expiresIn: 1000 // expires in 5min
     });
 
     userObj.token = token;
